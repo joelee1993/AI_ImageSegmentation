@@ -16,3 +16,23 @@ CT_Processed
 
     |-- utils.py
     |-- CT_Processed.py
+    
+## Tumor Task
+
+Test our basic 3D Unet model on a public tumor task
+
+### Training Result
+#### Unet
+
+![image](https://github.com/j217435/StrokeAI/blob/main/Figure/Unet.PNG)
+
+#### Unet_Visualization
+
+![image](https://github.com/j217435/StrokeAI/blob/main/Figure/307_unet_Axial.gif)
+
+#### Attention-Unet
+![image](https://github.com/j217435/StrokeAI/blob/main/Figure/AttUnet.PNG)
+
+#### Attention-Unet_Visualization
+
+![image](https://github.com/j217435/StrokeAI/blob/main/Figure/307_att_Axial.gif)
