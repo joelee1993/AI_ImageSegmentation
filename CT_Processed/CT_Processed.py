@@ -103,7 +103,7 @@ class CT_Processed:
 
         """
         
-        MNI_152 = sitk.ReadImage(r"S:\StrokeAI\Try\mni_icbm152_nlin_asym_09a\mni_icbm152_t1_tal_nlin_asym_09a.nii") 
+        MNI_152 = sitk.ReadImage(MNI_path) 
         nif_dat = sitk.ReadImage(nif_dat_path) 
 
         fixed_img = sitk.Cast(MNI_152, sitk.sitkFloat32)
