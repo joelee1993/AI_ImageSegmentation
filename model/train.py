@@ -78,7 +78,7 @@ def get_args( args : list) -> dict:
 
 
 def train(model, model_name, optimizer, loss_metric, lr, epochs, train_dataloader, val_dataloader, test_dataloader, **kwargs):
-    net = model
+    net = model.to(device)
     if torch.cuda.device_count()>1:
         print('Lets use',torch.cuda.device_count(),'GPU!')
     optimizer = optimizer(net.parameters(), lr = lr)
@@ -189,10 +189,9 @@ if MODE == 'train':
  
     device = torch.device('cuda:0' if torch.cuda.is_available() else'cpu')
     model = Att_Unet()
+    model = torch.nn.DataParallel(model,device_ids=[0,1,2,3])
     model = model.to(device)
-    gpu0_bsz = 1 
-    acc_grad = 2
-    model = BalancedDataParallel(gpu0_bsz // acc_grad, model, dim=0).to(device)
+
 
     model_name = "AttUnet_Parallel_BCE"
     if LOSS_FCN == 'BCEDiceLoss':
