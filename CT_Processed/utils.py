@@ -7,7 +7,6 @@ CT Preprocessing Fucntion Code
 '''
 
 
-# In[32]:
 
 
 import cv2
@@ -33,9 +32,6 @@ import pandas as pd
 import itk
 import itkwidgets
 
-
-
-# In[33]:
 
 class Utils:
     """
@@ -115,9 +111,6 @@ class Utils:
                 break
         return True
 
-
-# In[ ]:
-
     def imageCopy(mask_dir,filtered_dir,goal_dir):
         """
         Copy Data Block
@@ -143,10 +136,6 @@ class Utils:
             print(os.listdir(save_path))
             print('==============copied==============')
 
-
-
-    needs_preprocess = sorted(needs_preprocess)
-    len(needs_preprocess)
 
 
 
