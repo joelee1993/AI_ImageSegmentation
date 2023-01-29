@@ -52,17 +52,12 @@ class CTDataset(Dataset):
 #             transforms.ToTensor(),
 #         ])
         CT_preprocess = sitk.GetArrayFromImage(CT_preprocess)
-        #print(CT_preprocess.shape)
         
         MRI_preprocess = sitk.GetArrayFromImage(MRI_preprocess)
-        #print(MRI_preprocess.shape)
         CT_preprocess = torch.FloatTensor(CT_preprocess)
         MRI_preprocess = torch.FloatTensor(MRI_preprocess)
-        #CT_preprocess = CT_preprocess.unsqueeze(0)
         MRI_preprocess = MRI_preprocess.unsqueeze(0)
         MRI_preprocess1 = to_one_hot_3d(MRI_preprocess,2)
-        # CT_preprocess = CT_preprocess.unsqueeze(0)
-        # MRI_preprocess = MRI_preprocess.unsqueeze(0)
         print("CT:",CT_preprocess.shape)
         print("MRI:",MRI_preprocess.shape)
         print("Onehot:",MRI_preprocess1.shape)
@@ -98,13 +93,9 @@ class Attention_block(nn.Module):
     def forward(self, g, x):
         g1 = self.W_g(g)
         x1 = self.W_x(x)
-        #print(g1.shape)
-        #print(x1.shape)
         g1 = F.interpolate(g1, scale_factor = (x1.shape[2]/g1.shape[2],0.5,0.5), mode = 'trilinear')
-        #print(g1.shape)
         psi = self.relu(g1+x1)
         psi = self.psi(psi)
-        #print(psi.shape)
 
         return x*psi
 
@@ -218,27 +209,18 @@ class Att_Unet(nn.Module):
         #print('origin:',x.shape)
         x = self.encoder1(x)# relu(4->8)
         f1 = x #(8)
-        #print('f1:',x.shape)
-        #print("encoder1_size:",f1.shape)
         x = F.max_pool3d(x,kernel_size = 2,stride = 2,padding = 0)# maxpool(8->8)
-        #print("test",x.shape)
         x = self.encoder2(x)# relu(8->16)
         f2 = x #(16)
-        # print('f2:',x.shape)
-        #print("encoder2_size:",f2.shape)
         x = F.max_pool3d(x,kernel_size = 2,stride = 2,padding = 0)# maxpool(16->16)
         x = self.encoder3(x)# relu(16->32)
         f3 = x #(32)
-        #print('f3:',x.shape)
-        #print("encoder3_size:",f3.shape)
         x = F.max_pool3d(x,kernel_size = 2,stride = 2,padding = 0)# maxpool(32->32)
         x = self.encoder4(x)# relu(32->32)
         a1 = x
-        #print('x:',x.shape)
         A1 = self.att1(g = f3, x =a1)#attention block1
         #print('A1:',A1.shape)
         x = self.encoder5(x)#relu(32->64)
-        #print('x:',x.shape)
         
         # decoder section
 
