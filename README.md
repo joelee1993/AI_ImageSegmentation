@@ -17,7 +17,7 @@ CT_Processed
     
 ## Tumor Task
 
-Test our basic 3D Unet model on a public tumor task. The final goal is using this 3D attention Unet to apply on a stroke research. However, regarding it is an on-going project so we test the model on the public tumor set to ensure the basic performance.
+Test our basic 3D Unet model on a public tumor task. The final goal is using this 3D Unet to apply on a future research. However, regarding it is an on-going project so we test the model on the public tumor set to ensure the basic performance.
 
 ### Training Result
 #### Unet
